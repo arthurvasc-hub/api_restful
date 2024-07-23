@@ -1,0 +1,1 @@
+// Configurações gerais como conexão com banco de dados.
