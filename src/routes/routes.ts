@@ -1,6 +1,7 @@
 // Definições de rotas.
 import express from "express";
 import { createNewBook } from "../services/books";
+import { error } from "console";
 
 const router = express.Router()
 
@@ -16,7 +17,11 @@ const book = await createNewBook({
     author:"Chris Evans",
     synopsis:"Este livro aborda os conceitos fundamentais de segurança web, incluindo práticas recomendadas para proteger suas aplicações contra as ameaças mais comuns da internet.", 
 })
-res.json({book})
+if(book){
+    res.status(201).json({book})
+} else {
+    res.status(500).json({error: "Título já cadastrado"})
+}
 });
 
 

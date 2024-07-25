@@ -10,12 +10,11 @@ type CreateBookProps = {
 
 // Criação de um novo book (post)
 export const createNewBook = async ({title, author, synopsis}: CreateBookProps) =>{
-    const book = await prisma.books.create({
-        data: {
-            title,
-            author,
-            synopsis
-        }
+    try {
+        const book = await prisma.books.create({
+        data: {title, author, synopsis }
     })
 return book;
-}
+} catch(error){
+return false;
+}};

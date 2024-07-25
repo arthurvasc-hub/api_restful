@@ -15,9 +15,9 @@ datasource db {
 
 model Books {
   id Int @id @default(autoincrement())
-  title String
+  title String @unique
   synopsis String?
-  author String
+  author String 
   publishedDate  DateTime @map("publishedAt") @default(now())
   updatedAt DateTime @updatedAt @default(now())
 
