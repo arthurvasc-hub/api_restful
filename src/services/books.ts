@@ -1,19 +1,11 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "../libs/prisma"
 // Pasta para serviços do prisma.
 
-
-type CreateBookProps = {
-    title: string,
-    author: string,
-    synopsis: string | undefined
-}
-
 // Criação de um novo book (post)
-export const createNewBook = async ({title, author, synopsis}: CreateBookProps) =>{
+export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
     try {
-        const book = await prisma.books.create({
-        data: {title, author, synopsis }
-    })
+        const book = await prisma.books.create({ data })
 return book;
 } catch(error){
 return false;
