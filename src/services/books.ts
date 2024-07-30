@@ -14,13 +14,6 @@ export const getAllBooks = async () => {
         return allBooks
 };
 
-
-
-
-
-
-
-
 // Criação de um novo book (post)
 export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
     try {
