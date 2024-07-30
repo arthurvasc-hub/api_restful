@@ -1,14 +1,15 @@
 // Definições de rotas.
 import express from "express";
-import { createNewBook, createManyBooks } from "../services/books";
+import { createNewBook, createManyBooks, getAllBooks } from "../services/books";
 import { error } from "console";
 
 
 const router = express.Router()
 
 // Rota onde vou exibir todos os Livros no DB
-router.get('/books', (req, res) => {
-res.json({})
+router.get('/books', async (req, res) => {
+const result = await getAllBooks()
+res.json({ result })
 });
 
 // Rota para adicionar um livro 

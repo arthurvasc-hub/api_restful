@@ -2,6 +2,25 @@ import { Prisma } from "@prisma/client";
 import { prisma } from "../libs/prisma"
 // Pasta para serviços do prisma.
 
+// Listar todos os livros do DB
+
+export const getAllBooks = async () => {
+    const allBooks = await prisma.books.findMany({
+        select: {
+            id: true,
+            title: true,
+            author: true
+        }});
+        return allBooks
+};
+
+
+
+
+
+
+
+
 // Criação de um novo book (post)
 export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
     try {
