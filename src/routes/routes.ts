@@ -1,41 +1,38 @@
 // Definições de rotas.
 import express from "express";
-import { createNewBook } from "../services/books";
+import { createNewBook, createManyBooks } from "../services/books";
 import { error } from "console";
+
 
 const router = express.Router()
 
 // Rota onde vou exibir todos os Livros no DB
 router.get('/books', (req, res) => {
-res.json('Olá mundo')
+res.json({})
 });
 
 // Rota para adicionar um livro 
 router.post('/books', async (req, res) => {
 const book = await createNewBook({
-    title: "Introduction to Web Security",
-    author:"Chris Evans",
-    synopsis:"Este livro aborda os conceitos fundamentais de segurança web, incluindo práticas recomendadas para proteger suas aplicações contra as ameaças mais comuns da internet.", 
-})
+    title: "", author:"", synopsis:""});
 if(book){
-    res.status(201).json({book})
+    res.status(201).json({book});
 } else {
-    res.status(500).json({error: "Título já cadastrado"})
+    res.status(500).json({error: "Título já cadastrado"});
 }
 });
-
-
-// Rota para atualizar um livro 
-router.put('/books', (req, res) => {
-res.json('')
+// Rota para adicionar muitos livros
+router.post('/manyBooks', async (req, res) => {
+    const manyBooks = await createManyBooks ([
+        {title: "", author: "", synopsis: ""}, 
+        {title: "", author: "", synopsis: ""},
+        {title: "", author: "", synopsis: ""}]);
+    if(manyBooks){
+        res.status(201).json({manyBooks});
+    } else {
+        res.status(500).json({error});
+    }
 });
-
-
-// Rota para deletar um livro 
-router.delete('/books', (req, res) => {
-res.json('')
-});
-
 
 
 export default router;

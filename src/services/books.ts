@@ -6,7 +6,15 @@ import { prisma } from "../libs/prisma"
 export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
     try {
         const book = await prisma.books.create({ data })
-return book;
-} catch(error){
-return false;
-}};
+        return book;
+    } catch(error){
+        return false;
+        }};
+
+export const createManyBooks = async (books: Prisma.BooksCreateInput[]) => {
+    try {
+        const manyBooks = await prisma.books.createMany({data: books, skipDuplicates: true })
+        return manyBooks
+    } catch (error){
+        return false
+    }};
