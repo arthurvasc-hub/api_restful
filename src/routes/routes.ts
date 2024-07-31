@@ -1,6 +1,6 @@
 // Definições de rotas.
 import express from "express";
-import { createNewBook, createManyBooks, getAllBooks } from "../services/books";
+import { createNewBook, createManyBooks, getAllBooks, getByTitle } from "../services/books";
 import { error } from "console";
 
 
@@ -12,8 +12,17 @@ const result = await getAllBooks()
 res.json({ result })
 });
 
+// Rota onde vou exibir um livro no DB, pelo título
+router.get('/book', async (req, res) => {
+    const result = await getByTitle('TypeScript for JavaScript Developers')
+if(result){
+    res.status(200).json({ result })
+} else {
+    res.status(500).json({ error: "Não existe livro com esse título" })}
+});
+
 // Rota para adicionar um livro 
-router.post('/books', async (req, res) => {
+router.post('/book', async (req, res) => {
 const book = await createNewBook({
     title: "", author:"", synopsis:""});
 if(book){

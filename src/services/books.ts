@@ -3,7 +3,6 @@ import { prisma } from "../libs/prisma"
 // Pasta para serviços do prisma.
 
 // Listar todos os livros do DB
-
 export const getAllBooks = async () => {
     const allBooks = await prisma.books.findMany({
         select: {
@@ -13,7 +12,14 @@ export const getAllBooks = async () => {
         }});
         return allBooks
 };
-
+// Listar um livro do DB pelo título
+export const getByTitle = async (title: string) => {
+    const oneBook = await prisma.books.findUnique({
+        where: { title },
+        select:{id: true, author: true, title: true}
+    }) 
+    return oneBook;
+} 
 // Criação de um novo book (post)
 export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
     try {
