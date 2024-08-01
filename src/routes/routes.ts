@@ -24,7 +24,7 @@ if(result){
 // Rota para adicionar um livro 
 router.post('/book', async (req, res) => {
 const book = await createNewBook({
-    title: "", author:"", synopsis:""});
+    title: "Aprendendo a Linguagem R", author:"Milene Guimarães", synopsis:""});
 if(book){
     res.status(201).json({book});
 } else {
