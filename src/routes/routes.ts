@@ -1,6 +1,6 @@
 // Definições de rotas para o CRUD.
 import express from "express";
-import { createNewBook, createManyBooks, getAllBooks, getByTitle, updateBookTitle, updateBookAuthor, updateBookSynopsis } from "../services/books";
+import { createNewBook, createManyBooks, getAllBooks, getByTitle, updateBookTitle, updateBookAuthor, updateBookSynopsis, deleteBookByTitle } from "../services/books";
 import { error } from "console";
 
 
@@ -70,6 +70,17 @@ router.put('/bookSynopsis', async (req, res) => {
     res.status(400).json({ error: 'Falha ao tentar atualizar a Sinopse do livro'})
     }});  
 
+
+// Rota para DELETAR um livro através do Título
+
+router.delete('/book', async (req, res) => {
+    const result = await deleteBookByTitle(' ')
+    if(result){
+        res.status(200).json({ result })
+    } else {
+    res.status(400).json({ error: 'Não existe um livro com esse título para ser deletado.'})
+    }
+})
 
 
 

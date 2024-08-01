@@ -54,7 +54,7 @@ export const createManyBooks = async (books: Prisma.BooksCreateInput[]) => {
 
     // Atualizar TÍTULO do Livro 
 export const updateBookTitle = async (title: string, newTitle: string ) => {
-    const updatedBook = prisma.books.update({
+    const updatedBook = await prisma.books.update({
         where: {
             title: title
         },
@@ -66,7 +66,7 @@ export const updateBookTitle = async (title: string, newTitle: string ) => {
 }
     // Atualizar AUTOR do Livro 
 export const updateBookAuthor = async (title: string, newAuthor: string) => {
-    const updatedBook = prisma.books.update({
+    const updatedBook = await prisma.books.update({
         where: {
             title: title
         },
@@ -78,7 +78,7 @@ export const updateBookAuthor = async (title: string, newAuthor: string) => {
 };
     // Atualizar SINOPSE do Livro 
 export const updateBookSynopsis = async (title: string, newSynopsis: string) => {
-    const updatedBook = prisma.books.update({
+    const updatedBook = await prisma.books.update({
         where: {
             title: title,
         }, 
@@ -87,4 +87,11 @@ export const updateBookSynopsis = async (title: string, newSynopsis: string) => 
         }
     });
     return updatedBook;
+}
+    // Deletar um livro do BD através do Título
+export const deleteBookByTitle = async (title: string) => {
+    const deletedBook = await prisma.books.delete({
+        where: { title }
+    })
+    return deletedBook
 }
