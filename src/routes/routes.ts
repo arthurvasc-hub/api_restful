@@ -24,7 +24,7 @@ router.get('/book', async (req, res) => {
 // Rota para adicionar um livro 
 router.post('/book', async (req, res) => {
 const book = await createNewBook({
-    title: "Aprendendo a Linguagem R", author:"Milene Guimarães", synopsis:""});
+    title: " ", author: " ", synopsis:" "});
     if(book){
     res.status(201).json({book});
     } else {
@@ -63,7 +63,7 @@ router.put('/bookAuthor', async (req, res) => {
 
 // Rota para atualizar a Sinopse do livro
 router.put('/bookSynopsis', async (req, res) => {
-    const result = await updateBookSynopsis('TypeScript for JavaScript Developers','Descubra como o TypeScript pode melhorar a qualidade do seu código JavaScript com tipagem estática, interfaces e recursos modernos de desenvolvimento. Este livro é projetado para desenvolvedores JavaScript que desejam adotar TypeScript e aprender suas melhores práticas para projetos robustos e escaláveis.')                            // Recebe 2 parâmetros, Título do livro que deseja atualizar e Nova Sinopse para o livro.
+    const result = await updateBookSynopsis(' ',' ')                            // Recebe 2 parâmetros, Título do livro que deseja atualizar e Nova Sinopse para o livro.
     if(result){
     res.status(200).json({ result })
     } else {
