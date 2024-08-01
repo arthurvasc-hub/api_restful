@@ -27,10 +27,15 @@ export const getByTitle = async (title: string) => {
     }) 
     return oneBook;
 } 
-// Criação de um novo book (post)
+// Criação de um novo book através de upsert (Caso eu tente criar um livro já existente, ele vai me retorna-lo, caso não exista, ele cria.)
 export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
     try {
-        const book = await prisma.books.create({ data })
+        const book = await prisma.books.upsert({ 
+        where: {
+            title: data.title
+        }, update: {},
+        create: data
+        })
         return book;
     } catch(error){
         return false;

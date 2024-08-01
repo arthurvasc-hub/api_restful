@@ -24,7 +24,7 @@ router.get('/book', async (req, res) => {
 // Rota para adicionar um livro 
 router.post('/book', async (req, res) => {
 const book = await createNewBook({
-    title: " ", author: " ", synopsis:" "});
+    title: "", author: "", synopsis:" "});
     if(book){
     res.status(201).json({book});
     } else {
