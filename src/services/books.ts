@@ -35,11 +35,51 @@ export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
     } catch(error){
         return false;
         }};
-
+// Criação de vários books (post)
 export const createManyBooks = async (books: Prisma.BooksCreateInput[]) => {
     try {
-        const manyBooks = await prisma.books.createMany({data: books, skipDuplicates: true })
+        const manyBooks = await prisma.books.createMany({
+            data: books, 
+            skipDuplicates: true 
+        });
         return manyBooks
     } catch (error){
         return false
     }};
+
+    // Atualizar TÍTULO do Livro 
+export const updateBookTitle = async (title: string, newTitle: string ) => {
+    const updatedBook = prisma.books.update({
+        where: {
+            title: title
+        },
+        data: {
+            title: newTitle
+        }
+    });
+    return updatedBook;
+}
+    // Atualizar AUTOR do Livro 
+export const updateBookAuthor = async (title: string, newAuthor: string) => {
+    const updatedBook = prisma.books.update({
+        where: {
+            title: title
+        },
+        data: {
+            author: newAuthor
+        }
+    });
+    return updatedBook
+};
+    // Atualizar SINOPSE do Livro 
+export const updateBookSynopsis = async (title: string, newSynopsis: string) => {
+    const updatedBook = prisma.books.update({
+        where: {
+            title: title,
+        }, 
+        data: {
+            synopsis: newSynopsis
+        }
+    });
+    return updatedBook;
+}

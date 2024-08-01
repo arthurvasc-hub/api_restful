@@ -1,6 +1,6 @@
 // Definições de rotas.
 import express from "express";
-import { createNewBook, createManyBooks, getAllBooks, getByTitle } from "../services/books";
+import { createNewBook, createManyBooks, getAllBooks, getByTitle, updateBookTitle, updateBookAuthor, updateBookSynopsis } from "../services/books";
 import { error } from "console";
 
 
@@ -18,8 +18,8 @@ router.get('/book', async (req, res) => {
 if(result){
     res.status(200).json({ result })
 } else {
-    res.status(500).json({ error: "Não existe livro com esse título" })}
-});
+    res.status(500).json({ error: "Não existe livro com esse título" })
+}});
 
 // Rota para adicionar um livro 
 router.post('/book', async (req, res) => {
@@ -29,8 +29,8 @@ if(book){
     res.status(201).json({book});
 } else {
     res.status(500).json({error: "Título já cadastrado"});
-}
-});
+}});
+
 // Rota para adicionar muitos livros
 router.post('/manyBooks', async (req, res) => {
     const manyBooks = await createManyBooks ([
@@ -41,10 +41,37 @@ router.post('/manyBooks', async (req, res) => {
         res.status(201).json({manyBooks});
     } else {
         res.status(500).json({error});
-    }
-});
+    }});
+
+// Rota para atualizar o Título do livro
+router.put('/bookTitle', async (req, res) => {
+    const result = await updateBookTitle(' ',' ')                               // Recebe 2 parâmetros, Título do livro que deseja atualizar e Novo Título para o livro.
+if(result){
+    res.status(200).json({ result })
+} else {
+    res.status(400).json({ error: 'Falha ao tentar atualizar o Título do livro'})
+}});
+
+// Rota para atualizar o Autor do livro
+router.put('/bookAuthor', async (req, res) => {
+    const result = await updateBookAuthor(' ',' ')                              // Recebe 2 parâmetros, Título do livro que deseja atualizar e Novo Autor para o livro.
+if(result){
+    res.status(200).json({ result })
+} else {
+    res.status(400).json({ error: 'Falha ao tentar atualizar o Autor do livro'})
+}})
+
+// Rota para atualizar a Sinopse do livro
+router.put('/bookSynopsis', async (req, res) => {
+    const result = await updateBookSynopsis(' ',' ')                            // Recebe 2 parâmetros, Título do livro que deseja atualizar e Nova Sinopse para o livro.
+if(result){
+    res.status(200).json({ result })
+} else {
+    res.status(400).json({ error: 'Falha ao tentar atualizar a Sinopse do livro'})
+}})  
 
 
-export default router;
 
+
+export default router;                            
 
