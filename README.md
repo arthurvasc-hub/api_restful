@@ -51,14 +51,22 @@ A API possui as seguintes funcionalidades:
    ```bash
    npm run dev
 
-   Rotas da API
+## ROTAS DA API
+
 GET /books : Recupera todos os livros do catálogo.
+
 GET /book : Recupera um livro específico pelo Título.
+
 POST /book: Adiciona um novo livro ao catálogo.
+
 POST /manyBooks: Adiciona mais de um livro ao catálogo.
+
 PUT /bookTitle: Atualiza o Título do livro.
+
 PUT /bookAuthor: Atualiza o Autor do livro.
+
 PUT /bookSynopsis: Atualiza a sinopse do livro.
+
 DELETE /book: Remove um livro do catálogo pelo Título.
 
 ## Contribuição
