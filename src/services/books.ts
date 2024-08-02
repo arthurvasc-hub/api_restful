@@ -88,10 +88,15 @@ export const updateBookSynopsis = async (title: string, newSynopsis: string) => 
     });
     return updatedBook;
 }
-    // Deletar um livro do BD através do Título
-export const deleteBookByTitle = async (title: string) => {
-    const deletedBook = await prisma.books.delete({
-        where: { title }
-    })
-    return deletedBook
+    // Deletar um livro do BD 
+export const deleteBook = async (id: number) => {
+    try {
+        const deletedBook = await prisma.books.delete({
+            where: { id }
+        });
+        return deletedBook;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }

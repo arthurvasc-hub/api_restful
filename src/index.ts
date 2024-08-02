@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import * as dotenv from 'dotenv'
-import router from "./routes/routes"
+import routes from "./routes/api"
+import bodyParser from "body-parser";
 
 dotenv.config()
 // Criação do servidor
@@ -10,7 +11,9 @@ const port = process.env.PORT || 3000
 // Configurações do servidor 
 server.use(express.json())
 server.use(express.urlencoded({extended:true}))
-server.use('/', router)
+server.use(bodyParser.json())
+// Iniciar rotas
+server.use('/api', routes)
 
 
 
