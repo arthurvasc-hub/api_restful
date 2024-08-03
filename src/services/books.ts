@@ -4,14 +4,8 @@ import { prisma } from "../libs/prisma"
 
 // Listar todos os livros do DB
 export const getAllBooks = async () => {
-// Paginação FAKE //
-let page = 0; // Paginação de uma Query OU requisição
-let perPage = 2
-let skip = page * perPage
 
     const allBooks = await prisma.books.findMany({
-        skip: skip,
-        take: perPage,
         select: {
             id: true,
             title: true,

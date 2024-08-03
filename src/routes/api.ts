@@ -1,7 +1,6 @@
 // Definições de rotas para o CRUD.
 import express, { Request, Response } from "express";
 import {  getAllBooks, createNewBook, deleteBook, updateBook} from "../services/books";
-import { title } from "process";
 
 
 const router = express.Router()
@@ -19,7 +18,7 @@ router.get('/book', async (req, res) => {
    });
 
 // Rota para adicionar um livro 
-router.post('/book', async (req, res) => {
+router.post('/book', async (req: Request, res: Response) => {
     try {
         const book = await createNewBook(req.body);
         if (book) {
@@ -33,7 +32,7 @@ router.post('/book', async (req, res) => {
 });
 
 // Rota para adicionar muitos livros
-router.post('/books', async (req, res) => {
+router.post('/books', async (req: Request, res: Response) => {
     res.send({TYPE: 'POST'})
     });
 
@@ -54,7 +53,7 @@ router.put('/book/id:', async (req: Request<BookParams>, res: Response) => {
 
 
 // Rota para DELETAR um livro através do ID
-router.delete('/book/:id', async (req, res) => {
+router.delete('/book/:id', async (req: Request<BookParams>, res: Response) => {
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
         return res.status(400).json({ error: 'ID inválido fornecido.' });
