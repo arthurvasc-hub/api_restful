@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import axios from 'axios';
 
 class BookApp extends React.Component {
@@ -7,25 +7,13 @@ class BookApp extends React.Component {
         searchTitle: ''
     };
 
-    componentDidMount() {
-        this.fetchBooks();
-    }
-
-    fetchBooks = async () => {
-        try {
-            const response = await axios.get('http://localhost:3000/api/books');
-            this.setState({ books: response.data.result });
-        } catch (error) {
-            console.error('Erro ao buscar livros:', error);
-        }
-    };
-
     handleSearch = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/book?title=${this.state.searchTitle}`);
-            this.setState({ books: response.data ? [response.data] : [] });
+            const response = await axios.get(`http://localhost:3000/api/book?title=${encodeURIComponent(this.state.searchTitle)}`);
+            this.setState({ books: response.data });
         } catch (error) {
             console.error('Erro ao buscar livro pelo título:', error);
+            this.setState({ books: [] });
         }
     };
 
@@ -43,7 +31,8 @@ class BookApp extends React.Component {
                 <ul>
                     {this.state.books.map(book => (
                         <li key={book.id}>
-                            {book.title} - {book.author}
+                            <strong>{book.title}</strong> - {book.author}
+                            {book.synopsis && <p><em>Sinopse: {book.synopsis}</em></p>}
                         </li>
                     ))}
                 </ul>
@@ -53,3 +42,4 @@ class BookApp extends React.Component {
 }
 
 export default BookApp;
+

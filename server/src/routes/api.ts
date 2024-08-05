@@ -1,26 +1,26 @@
 // Definições de rotas para o CRUD.
 import express, { Request, Response } from "express";
-import {  getAllBooks, createNewBook, deleteBook, updateBook, getByTitle} from "../services/books";
+import {  getAllBooks, createNewBook, deleteBook, updateBook, getBooksByTitle} from "../services/books";
 
 
 const router = express.Router()
 
 // Rota onde vou exibir todos os Livros no DB
-router.get('/books', async (req, res) => {
-const result = await getAllBooks()
-    res.json({ result })
-    });
 
 // Rota onde vou exibir um livro no DB, pelo título
-router.get('/book', async (req, res) => {
+router.get('/book', async (req: Request, res: Response) => {
     const { title } = req.query;
-    const book = await getByTitle(title as string);
-    if (book) {
-        res.json(book);
+    if (typeof title === 'string') {
+        const books = await getBooksByTitle(title);
+        if (books.length > 0) {
+            res.json(books);
+        } else {
+            res.status(404).json({ error: 'Nenhum livro encontrado com esse título.' });
+        }
     } else {
-        res.status(404).json({ error: 'Livro não encontrado' });
+        res.status(400).json({ error: 'Título inválido.' });
     }
-   });
+});
 
 // Rota para adicionar um livro 
 router.post('/book', async (req: Request, res: Response) => {

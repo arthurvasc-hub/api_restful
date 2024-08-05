@@ -14,13 +14,24 @@ export const getAllBooks = async () => {
         return allBooks
 };
 // Listar um livro do DB pelo título
-export const getByTitle = async (title: string) => {
-    const oneBook = await prisma.books.findUnique({
-        where: { title },
-        select:{id: true, author: true, title: true}
-    }) 
-    return oneBook;
-} 
+export const getBooksByTitle = async (title?: string) => {
+    const query: any = {}; // define um objeto para armazenar a consulta
+    if (title) {
+        query.where = {
+            title: {
+                contains: title,
+                mode: 'insensitive', // opcional: ignora maiúsculas/minúsculas
+            }};
+    }
+    return prisma.books.findMany({
+        ...query,
+        select: {
+            id: true,
+            title: true,
+            author: true,
+            synopsis: true
+        }});
+};
 // Criação de um novo book através de upsert (Caso eu tente criar um livro já existente, ele vai me retorna-lo, caso não exista, ele cria.)
 export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
     try {
