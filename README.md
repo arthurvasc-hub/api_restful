@@ -79,7 +79,7 @@ styles.css: Estilos CSS.
 **USO**
 
 1. Buscar um livro: No frontend, digite o título do livro na caixa de pesquisa e clique em "Buscar".
-2. Adicionar um livro: Envie um POST request para /api/book com o corpo da requisição no formato:
+2. Adicionar um livro: Envie um POST request para /api/book com o corpo da requisição no formato JSON:
    ```bash
    {
      "title": "Título do Livro",
