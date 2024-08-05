@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import * as dotenv from 'dotenv'
+import cors from "cors"
 import routes from "./routes/api"
 import bodyParser from "body-parser";
 
@@ -11,12 +12,13 @@ const port = process.env.PORT || 3000
 
 
 // Configurações do servidor 
-server.use(express.json())
-server.use(express.urlencoded({extended:true}))
-server.use(bodyParser.json())
-server.use(express.static('public'))
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({extended:true}));
+server.use(bodyParser.json());
+server.use(express.static('public'));
 // Iniciar rotas
-server.use('/api', routes)
+server.use('/api', routes);
 
 
 

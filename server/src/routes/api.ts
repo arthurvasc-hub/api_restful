@@ -1,6 +1,6 @@
 // Definições de rotas para o CRUD.
 import express, { Request, Response } from "express";
-import {  getAllBooks, createNewBook, deleteBook, updateBook} from "../services/books";
+import {  getAllBooks, createNewBook, deleteBook, updateBook, getByTitle} from "../services/books";
 
 
 const router = express.Router()
@@ -13,8 +13,13 @@ const result = await getAllBooks()
 
 // Rota onde vou exibir um livro no DB, pelo título
 router.get('/book', async (req, res) => {
-    res.send({
-        TYPE: 'GET'})
+    const { title } = req.query;
+    const book = await getByTitle(title as string);
+    if (book) {
+        res.json(book);
+    } else {
+        res.status(404).json({ error: 'Livro não encontrado' });
+    }
    });
 
 // Rota para adicionar um livro 
