@@ -7,7 +7,7 @@ Uma API RESTful para gerenciamento de livros, construída com Node.js, TypeScrip
 - **Frontend**: React, HTML, CSS
 - **Backend**: Node.js, TypeScript, Express
 - **Banco de Dados**: PostgreSQL, Prisma
-- **Validação**: ZOD
+- **Validação**: Zod
 
 ## Funcionalidades
 
