@@ -7,7 +7,7 @@ Uma API RESTful para gerenciamento de livros, construída com Node.js, TypeScrip
 - **Frontend**: React, HTML, CSS
 - **Backend**: Node.js, TypeScript, Express
 - **Banco de Dados**: PostgreSQL, Prisma
-- **Validação**: class-validator, class-transformer
+- **Validação**: ZOD
 
 ## Funcionalidades
 
@@ -28,8 +28,8 @@ Uma API RESTful para gerenciamento de livros, construída com Node.js, TypeScrip
 1. **Clone o repositório**
 
    ```bash
-   git clone https://github.com/usuario/repo-livros.git
-   cd repo-livros
+   git clone https://github.com/arthurvasc-hub/api_restful
+   cd api_restful
 2. **Instale as dependências**
    ```bash
    cd server
@@ -62,7 +62,7 @@ O frontend estará acessível em http://localhost:3001.
 
 *server/*
 src/: Código fonte do backend
-dtos/: Contém os DTOs para validação de dados.
+validation/: Contém as configurações zod para validação de dados.
 libs/: Configuração do Prisma Client.
 routes/: Definições das rotas da API.
 services/: Lógica de interação com o banco de dados.
@@ -98,12 +98,7 @@ Este projeto está licenciado sob a MIT License.
 **Contato**
 Se você tiver alguma dúvida, pode entrar em contato comigo através do arthurvasc2@gmail.com
 
-### Considerações
-1. **Substitua URLs e Dados**: Substitua `https://github.com/usuario/repo-livros.git`, `user:password@localhost:5432/database_name`, e `email@example.com` com os valores corretos para o seu projeto.
-2. **Adapte a Estrutura**: Ajuste a estrutura e as descrições de acordo com o seu projeto real e os detalhes específicos da implementação.
-3. **Adicione Imagens ou Exemplos**: Se desejar, adicione imagens ou exemplos de como usar a API e a interface para tornar o README mais informativo.
 
-Se precisar de mais ajuda ou tiver alguma dúvida, é só avisar!
 
 
 
