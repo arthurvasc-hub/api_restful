@@ -96,7 +96,7 @@ Sinta-se à vontade para abrir issues e pull requests para melhorias e correçõ
 Este projeto está licenciado sob a MIT License.
 
 **Contato**
-Se você tiver alguma dúvida, pode entrar em contato comigo através do arthurvasc2@gmail.com
+Se você tiver alguma dúvida, pode entrar em contato comigo através do email: arthurvasc2@gmail.com
 
 
 
