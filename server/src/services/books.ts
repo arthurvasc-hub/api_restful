@@ -13,14 +13,14 @@ export const getAllBooks = async () => {
         }});
         return allBooks
 };
-// Listar um livro do DB pelo título
-export const getBooksByTitle = async (title?: string) => {
+// Listar livros do DB pelo título
+export const getBooksByTitle = async (title: string) => {
     const query: any = {}; // define um objeto para armazenar a consulta
     if (title) {
         query.where = {
             title: {
                 contains: title,
-                mode: 'insensitive', // opcional: ignora maiúsculas/minúsculas
+                mode: 'insensitive' // opcional: ignora maiúsculas/minúsculas
             }};
     }
     return prisma.books.findMany({
