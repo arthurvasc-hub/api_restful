@@ -1,77 +1,110 @@
-# API RESTful para Catálogo de Livros
+# Livros REST API
 
-## Descrição
-
-Este projeto é uma API RESTful simples para gerenciar um catálogo de livros. Ele foi desenvolvido com Node.js, Express e TypeScript, e utiliza o PostgreSQL como banco de dados. O principal objetivo deste projeto é o aprendizado e a prática de desenvolvimento de APIs, bem como a construção de um portfólio pessoal para conseguir um emprego na área de desenvolvimento web.
-
-## Funcionalidades
-
-A API possui as seguintes funcionalidades:
-
-- **Create**: Adicionar um novo livro ao catálogo.
-- **Read**: Recuperar informações de livros do catálogo.
-- **Update**: Atualizar informações de um livro existente.
-- **Delete**: Remover um livro do catálogo.
-- **Autenticação**: Garantir que apenas usuários autenticados possam manipular os dados.
+Uma API RESTful para gerenciamento de livros, construída com Node.js, TypeScript, Express, e Prisma. O projeto inclui um frontend em React para a busca de livros pelo título.
 
 ## Tecnologias Utilizadas
 
-- **Node.js**: Plataforma de desenvolvimento para o backend.
-- **Express**: Framework web para Node.js.
-- **TypeScript**: Superconjunto de JavaScript que adiciona tipagem estática.
-- **PostgreSQL**: Sistema de gerenciamento de banco de dados relacional.
-- **Prisma**: ORM para facilitar a interação com o banco de dados.
-- **DBeaver**: Ferramenta de gerenciamento de banco de dados.
+- **Frontend**: React, HTML, CSS
+- **Backend**: Node.js, TypeScript, Express
+- **Banco de Dados**: PostgreSQL, Prisma
+- **Validação**: class-validator, class-transformer
 
-## Como Executar o Projeto
+## Funcionalidades
+
+- **Busca de Livros**: Permite buscar livros pelo título.
+- **Criação de Livros**: Adiciona novos livros ao banco de dados.
+- **Atualização de Livros**: Atualiza informações de livros existentes.
+- **Deleção de Livros**: Remove livros do banco de dados.
+
+## Instalação e Configuração
 
 ### Pré-requisitos
 
-- Node.js instalado
-- PostgreSQL instalado e rodando
-- DBeaver (opcional, para gerenciamento visual do banco de dados)
+- [Node.js](https://nodejs.org/) (versão 18 ou superior)
+- [PostgreSQL](https://www.postgresql.org/) (para o banco de dados)
 
-### Passos para execução
+### Configuração do Backend
 
-1. **Clone o repositório:**
+1. **Clone o repositório**
 
    ```bash
-   git clone https://github.com/seu-usuario/api_restful.git
-   cd api_restful
-   
-2. Instale as dependências:
+   git clone https://github.com/usuario/repo-livros.git
+   cd repo-livros
+2. **Instale as dependências**
    ```bash
-    npm install
-3. Configure as variáveis de ambiente:
-   - Crie um arquivo .env na raiz do projeto e defina as variáveis de ambiente necessárias, como o URL do banco de dados PostgreSQL.
-4. Migrate o banco de dados:
+   cd server
+   npm install
+3. **Configure as variáveis de ambiente**
+   - Crie um arquivo .env na pasta server com a configuração do banco de dados:
+     ```bash
+     DATABASE_URL=postgresql://user:password@localhost:5432/database_name
+     PORT=3000
+4. **Execute as migrações do Prisma**
    ```bash
    npx prisma migrate dev
-5. Inicie o servidor:
+5. **Inicie o servidor**
    ```bash
    npm run dev
+ O servidor estará rodando em http://localhost:3000.
 
-## ROTAS DA API
+ ### Configuração do Frontend
+ 
+1. **Instale as dependências**
+   ```bash
+   cd client
+   npm install
+2. **Inicie o servidor de desenvolvimento**
+   ```bash
+   npm start
+O frontend estará acessível em http://localhost:3001.
 
-GET /books : Recupera todos os livros do catálogo.
+**Estrutura do Projeto**
 
-GET /book : Recupera um livro específico pelo Título.
+*server/*
+src/: Código fonte do backend
+dtos/: Contém os DTOs para validação de dados.
+libs/: Configuração do Prisma Client.
+routes/: Definições das rotas da API.
+services/: Lógica de interação com o banco de dados.
+prisma/: Configuração do Prisma e esquema do banco de dados.
+index.ts: Arquivo principal para iniciar o servidor.
 
-POST /book: Adiciona um novo livro ao catálogo.
+*client/*
+public/: Arquivos estáticos e HTML.
+src/: Código fonte do frontend
+App.js: Componente principal do React.
+index.js: Ponto de entrada do React.
+styles.css: Estilos CSS.
+   
+**USO**
 
-POST /manyBooks: Adiciona mais de um livro ao catálogo.
+1. Buscar um livro: No frontend, digite o título do livro na caixa de pesquisa e clique em "Buscar".
+2. Adicionar um livro: Envie um POST request para /api/book com o corpo da requisição no formato JSON:
+   ```bash
+   {
+     "title": "Título do Livro",
+     "author": "Autor do Livro",
+     "synopsis": "Sinopse do Livro"
+   }
+3. Atualizar um livro: Envie um PUT request para /api/book/:id com os dados atualizados.
+4. Deletar um livro: Envie um DELETE request para /api/book/:id para remover um livro pelo ID.
 
-PUT /bookTitle: Atualiza o Título do livro.
+**Contribuindo**
+Sinta-se à vontade para abrir issues e pull requests para melhorias e correções. Seu feedback é muito bem-vindo!
 
-PUT /bookAuthor: Atualiza o Autor do livro.
+**Licença**
+Este projeto está licenciado sob a MIT License.
 
-PUT /bookSynopsis: Atualiza a sinopse do livro.
+**Contato**
+Se você tiver alguma dúvida, pode entrar em contato comigo através do arthurvasc2@gmail.com
 
-DELETE /book: Remove um livro do catálogo pelo Título.
+### Considerações
+1. **Substitua URLs e Dados**: Substitua `https://github.com/usuario/repo-livros.git`, `user:password@localhost:5432/database_name`, e `email@example.com` com os valores corretos para o seu projeto.
+2. **Adapte a Estrutura**: Ajuste a estrutura e as descrições de acordo com o seu projeto real e os detalhes específicos da implementação.
+3. **Adicione Imagens ou Exemplos**: Se desejar, adicione imagens ou exemplos de como usar a API e a interface para tornar o README mais informativo.
 
-## Contribuição
+Se precisar de mais ajuda ou tiver alguma dúvida, é só avisar!
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e enviar pull requests.
 
-## Licença
-Este projeto está licenciado sob a MIT License - veja o arquivo LICENSE para mais detalhes.
+
+
