@@ -4,43 +4,45 @@ import { createNewBook, deleteBook, updateBook, getBooksByTitle} from "../servic
 import { bookSchema, titleSchema } from "../validation/zod";
 
 
+
 const router = express.Router()
 
 
 // Rota onde vou exibir um livro no DB, pelo título
 router.get('/book', async (req: Request, res: Response) => {
     // Validação Zod
+try {
     const validation = titleSchema.safeParse(req.query);
    if(!validation.success){
     return res.status(400).json({error: 'Título inválido.'})
    };
-
    const { title } = validation.data;
    const books = await getBooksByTitle(title);
-
-   if (books.length > 0){
-    res.json(books);
-   } else {
-    
+   if (!books){
+    return res.status(422).json({ error: 'Dados inválidos para exibição do livro'})
+   } 
+    return res.json(books);
+} catch (error) {
+        res.status(500).send({ error: 'Erro interno do servidor' });
+   };
 });
 
 // Rota para adicionar um livro 
 router.post('/book', async (req: Request, res: Response) => {
     // Validação Zod
+try {
     const validation = bookSchema.safeParse(req.body)
     if(!validation.success){
         return res.status(422).json({ error: 'Dados inválidos para o livro. Verifique os dados enviados.'})
     };
-    try {
         const book = await createNewBook(validation.data);
-        if (book) {
-            res.send({ book });
-        } else {
-            res.status(422).send({ error: 'Não foi possível criar o livro. Verifique os dados enviados.' });
-        }
-    } catch (error) {
+        if (!book) {
+        return res.status(422).send({ error: 'Não foi possível criar o livro. Verifique os dados enviados.' });
+        } 
+        return res.json(book);
+} catch (error) {
         res.status(500).send({ error: 'Erro interno do servidor' });
-    }
+    };
 });
 
 
@@ -49,42 +51,40 @@ type BookParams = {
     id: string // ID VEM COMO STRING NA URL
 };
 router.put('/book/:id', async (req: Request<BookParams>, res: Response) => {
+try {
     const bookId = parseInt(req.params.id);
-    if (isNaN(bookId)) {
+    if(isNaN(bookId)) {
         return res.status(400).json({ error: 'ID inválido.' });
-    }
-
+    };
     // Validação Zod
     const validation = bookSchema.safeParse(req.body);
-    if (!validation.success) {
+    if(!validation.success) {
         return res.status(400).json({ error: 'Não foi possível atualizar o livro. Verifique os dados enviados.' });
-    }
+    };
     const updatedData = validation.data;
-
-    try {
         const updatedBook = await updateBook(bookId, updatedData);
-        res.json(updatedBook);
-    } catch (error) {
-        res.status(500).json({ error: 'Falha ao atualizar o livro' });
-    }
+        return res.json(updatedBook);
+} catch (error) {
+        return res.status(500).json({ error: 'Erro interno do servidor' });
+    } 
 });
 
 
 // Rota para DELETAR um livro através do ID
 router.delete('/book/:id', async (req: Request<BookParams>, res: Response) => {
+try {
     const id = parseInt(req.params.id, 10);
-    if (isNaN(id)) {
+    if(isNaN(id)) {
         return res.status(400).json({ error: 'ID inválido fornecido.' });
     };
     const result = await deleteBook(id);
-    if (result) {
-        res.status(200).json({ result });
-    } else {
-        res.status(404).json({ error: 'Não existe um livro com esse ID para ser deletado.' });
-    }
-})
-
-
+    if(!result) {
+        res.status(404).json({ error: 'Não existe um livro com esse ID para ser deletado.' })
+    };  
+        return res.status(200).json({ result });
+} catch {
+        return res.status(500).send({ error: 'Erro interno do servidor' })};
+});
 
 export default router;                            
 

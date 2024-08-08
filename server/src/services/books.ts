@@ -15,22 +15,22 @@ export const getAllBooks = async () => {
 };
 // Listar livros do DB pelo título
 export const getBooksByTitle = async (title: string) => {
-    const query: any = {}; // define um objeto para armazenar a consulta
-    if (title) {
-        query.where = {
-            title: {
+    try {
+        const books = await prisma.books.findMany({
+        where: {
+                title: {
                 contains: title,
-                mode: 'insensitive' // opcional: ignora maiúsculas/minúsculas
-            }};
+                mode: 'insensitive' } // Ignora maiúsculas/minúsculas
+    },  select: {
+                id: true,
+                title: true,
+                author: true,
+                synopsis: true, 
+    }});
+        return books;
+    } catch (error) {
+        return false; 
     }
-    return prisma.books.findMany({
-        ...query,
-        select: {
-            id: true,
-            title: true,
-            author: true,
-            synopsis: true
-        }});
 };
 // Criação de um novo book através de upsert (Caso eu tente criar um livro já existente, ele vai me retorna-lo, caso não exista, ele cria.)
 export const createNewBook = async (data: Prisma.BooksCreateInput) =>{
@@ -66,10 +66,8 @@ export const updateBook = async (id: number, data: Prisma.BooksUpdateInput ) => 
     });
     return updatedBook;
 } catch (error){
-    console.log("Falha ao atualizar o livro", error)
-    throw error
-    }
-};
+    return false
+}};
     // Deletar um livro do BD 
 export const deleteBook = async (id: number) => {
     try {
@@ -78,7 +76,6 @@ export const deleteBook = async (id: number) => {
         });
         return deletedBook;
     } catch (error) {
-        console.error(error);
-        return null;
+        return false;
     }
 }
