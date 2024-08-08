@@ -21,8 +21,7 @@ router.get('/book', async (req: Request, res: Response) => {
    if (books.length > 0){
     res.json(books);
    } else {
-    res.status(404).json({error: 'Nenhum livro encontrado com esse título.'})
-   }
+    
 });
 
 // Rota para adicionar um livro 
