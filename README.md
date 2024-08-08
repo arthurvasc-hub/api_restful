@@ -4,7 +4,6 @@ Uma API RESTful para gerenciamento de livros, construída com Node.js, TypeScrip
 
 ## Tecnologias Utilizadas
 
-- **Frontend**: React, HTML, CSS
 - **Backend**: Node.js, TypeScript, Express
 - **Banco de Dados**: PostgreSQL, Prisma
 - **Validação**: Zod
@@ -47,16 +46,6 @@ Uma API RESTful para gerenciamento de livros, construída com Node.js, TypeScrip
    npm run dev
  O servidor estará rodando em http://localhost:3000.
 
- ### Configuração do Frontend
- 
-1. **Instale as dependências**
-   ```bash
-   cd client
-   npm install
-2. **Inicie o servidor de desenvolvimento**
-   ```bash
-   npm start
-O frontend estará acessível em http://localhost:3001.
 
 **Estrutura do Projeto**
 
@@ -69,16 +58,10 @@ services/: Lógica de interação com o banco de dados.
 prisma/: Configuração do Prisma e esquema do banco de dados.
 index.ts: Arquivo principal para iniciar o servidor.
 
-*client/*
-public/: Arquivos estáticos e HTML.
-src/: Código fonte do frontend
-App.js: Componente principal do React.
-index.js: Ponto de entrada do React.
-styles.css: Estilos CSS.
    
 **USO**
 
-1. Buscar um livro: No frontend, digite o título do livro na caixa de pesquisa e clique em "Buscar".
+1. Buscar um livro: Envie um GET request para /api/book com a query do título desejado.
 2. Adicionar um livro: Envie um POST request para /api/book com o corpo da requisição no formato JSON:
    ```bash
    {
