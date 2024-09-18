@@ -1,6 +1,6 @@
 # Livros REST API
 
-Uma API RESTful para gerenciamento de livros, construída com Node.js, TypeScript, Express, e Prisma. O projeto inclui um frontend em React para a busca de livros pelo título.
+Uma API RESTful para gerenciamento de livros, construída com Node.js, TypeScript, Express, e Prisma.
 
 ## Tecnologias Utilizadas
 
